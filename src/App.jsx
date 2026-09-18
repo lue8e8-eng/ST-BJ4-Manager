@@ -914,7 +914,6 @@ function RevenueTracker() {
             if (!item.person) return { ...item, person: '查' };
             if (item.person === '夥伴 A') return { ...item, person: '查' };
             if (item.person === '夥伴 B') return { ...item, person: '歐' };
-            if (item.person === '姜佩均') return { ...item, person: '安' };
             return item;
           });
         }
@@ -938,7 +937,6 @@ function RevenueTracker() {
         let parsedData = JSON.parse(saved);
         if (Array.isArray(parsedData)) {
           return parsedData.map(item => {
-            if (item.source === '姜佩均') return { ...item, source: '安' };
             return item;
           });
         }
@@ -1328,7 +1326,7 @@ function RevenueTracker() {
   }, [cumulativeData, projectionData, filteredEntries]);
 
   const uniqueTrainers = useMemo(() => {
-    const trainers = new Set(['查', '歐', '安']); 
+    const trainers = new Set(['查', '歐']); 
     entries.filter(e => e.date && e.date.startsWith(selectedMonth)).forEach(e => trainers.add(e.person));
     customerEntries.filter(e => e.date && e.date.startsWith(selectedMonth)).forEach(e => trainers.add(e.source));
     return Array.from(trainers);
@@ -1338,7 +1336,6 @@ function RevenueTracker() {
     switch (personName) {
       case '查': return 'bg-blue-50 text-blue-700';
       case '歐': return 'bg-purple-50 text-purple-700';
-      case '安': return 'bg-orange-50 text-orange-700';
       default: return 'bg-slate-100 text-slate-700 border border-slate-200';
     }
   };
